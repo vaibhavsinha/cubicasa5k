@@ -562,9 +562,9 @@ class PolygonWall(Wall):
     def get_width(self, X, Y, direction):
         _, _, p1, p2 = self._get_min_points(X, Y)
 
-        if direction is 'H':
+        if direction == 'H':
             return (abs(p1[0][1] - p1[1][1]) + abs(p2[0][1] - p2[1][1])) / 2
-        elif 'V':
+        elif direction == 'V':
             return (abs(p1[0][0] - p1[1][0]) + abs(p2[0][0] - p2[1][0])) / 2
 
     def _width(self, values):

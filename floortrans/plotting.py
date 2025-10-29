@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from matplotlib import colors, cm
+from matplotlib import colors
 import matplotlib.path as mplp
 import numpy as np
 import torch
@@ -14,14 +14,14 @@ def discrete_cmap_furukawa():
              '#fccde5', '#80b1d3', '#d9d9d9', '#fb8072', '#577a4d',
              'white', '#000000', '#e31a1c']
     cmap3 = colors.ListedColormap(cpool, 'rooms_furukawa')
-    cm.register_cmap(cmap=cmap3)
+    plt.colormaps.register(cmap3, force=True)
 
     cpool = ['#ede676', '#8dd3c7', '#b15928', '#fdb462', '#ffff99',
              '#fccde5', '#80b1d3', '#d9d9d9', '#fb8072', '#696969',
              '#577a4d', '#e31a1c', '#42ef59', '#8c595a', '#3131e5',
              '#48e0e6', 'white']
     cmap3 = colors.ListedColormap(cpool, 'icons_furukawa')
-    cm.register_cmap(cmap=cmap3)
+    plt.colormaps.register(cmap3, force=True)
 
 
 def drawJunction(h, point, point_type, width, height):
@@ -583,32 +583,33 @@ def plot_pre_rec_4(instances, classes):
 
 def discrete_cmap():
     """create a colormap with N (N<15) discrete colors and register it"""
-    # define individual colors as hex values
     cpool = ['#DCDCDC', '#b3de69', '#000000', '#8dd3c7', '#fdb462',
              '#fccde5', '#80b1d3', '#808080', '#fb8072', '#696969',
              '#577a4d', '#ffffb3']
-    cmap3 = colors.ListedColormap(cpool, 'rooms')
-    cm.register_cmap(cmap=cmap3)
+    if 'rooms' in plt.colormaps:
+        plt.colormaps.unregister('rooms')
+    plt.colormaps.register(colors.ListedColormap(cpool, 'rooms'))
 
     cpool = ['#DCDCDC', '#8dd3c7', '#b15928', '#fdb462', '#ffff99',
              '#fccde5', '#80b1d3', '#808080', '#fb8072', '#696969',
              '#577a4d']
-    cmap3 = colors.ListedColormap(cpool, 'icons')
-    cm.register_cmap(cmap=cmap3)
+    if 'icons' in plt.colormaps:
+        plt.colormaps.unregister('icons')
+    plt.colormaps.register(colors.ListedColormap(cpool, 'icons'))
 
-    """create a colormap with N (N<15) discrete colors and register it"""
-    # define individual colors as hex values
     cpool = ['#DCDCDC', '#b3de69', '#000000', '#8dd3c7', '#fdb462',
              '#fccde5', '#80b1d3', '#808080', '#fb8072', '#696969',
              '#577a4d', '#ffffb3', 'd3d5d7']
-    cmap3 = colors.ListedColormap(cpool, 'rooms_furu')
-    cm.register_cmap(cmap=cmap3)
+    if 'rooms_furu' in plt.colormaps:
+        plt.colormaps.unregister('rooms_furu')
+    plt.colormaps.register(colors.ListedColormap(cpool, 'rooms_furu'))
 
     cpool = ['#DCDCDC', '#8dd3c7', '#b15928', '#fdb462', '#ffff99',
              '#fccde5', '#80b1d3', '#808080', '#fb8072', '#696969',
              '#577a4d']
-    cmap3 = colors.ListedColormap(cpool, 'rooms_furu')
-    cm.register_cmap(cmap=cmap3)
+    if 'icons_furu' in plt.colormaps:
+        plt.colormaps.unregister('icons_furu')
+    plt.colormaps.register(colors.ListedColormap(cpool, 'icons_furu'))
 
 
 def segmentation_plot(rooms_pred, icons_pred, rooms_label, icons_label):
